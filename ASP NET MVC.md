@@ -52,13 +52,14 @@ Despite the fact that every controller action needs to return an ActionResult, y
 rarely be creating them manually. Instead, you’ll usually rely on the helper methods
 that the System.Web.Mvc.Controller base class provides, such as:
 	
+	
 	public ActionResult About()
 	{
 		ViewBag.Message = "Your application description page.";
-	
+		
 		return View();
 	}
-	
+
 
 - **Content()**
 Returns a **ContentResult** that renders arbitrary text, e.g., “Hello, world!”
@@ -87,3 +88,79 @@ two helpers also have permanent redirect variants:** RedirectToActionPermanent()
 and **RedirectToRoutePermanent()**.
 - **View()**
 Returns a **ViewResult** that renders a view.
+
+### Action Parameters ###
+This is a way on interacting with request values. The controller action in this particular example creates and populates the properties of a new Auction object with values taken from the request.
+```csharp
+public ActionResult Create()
+{
+	var auction = new Auction() {	
+		Title = Request["title"],
+		CurrentPrice = Decimal.Parse(Request["currentPrice"]),
+		StartTime = DateTime.Parse(Request["startTime"]),
+		EndTime = DateTime.Parse(Request["endTime"]),
+	};
+}
+```
+
+Here is the same controller action as before, this time using model-bound method parameters
+```csharp
+public ActionResult Create(string title, decimal currentPrice,DateTime startTime, DateTime endTime)
+{
+	var auction = new Auction() {
+		Title = title,
+		CurrentPrice = currentPrice,
+		StartTime = startTime,
+		EndTime = endTime,
+	};
+}
+```
+
+Now, instead of retrieving the values from the Request explicitly, the action declares
+them as parameters. When the ASP.NET MVC framework executes this method, it
+attempts to populate the action’s parameters using the same values from the request
+that the previous example showed. Note that—even though we’re not accessing the
+Request dictionary directly the parameter names are still very important, because they
+still correspond to values from in the Request.
+
+Folowing example binds directly to an Auction instance, this shows the true power of model binding.
+```csharp
+public ActionResult Create(Auction auction)
+{
+	// ...
+}
+```
+
+### Views ###
+- Razor View Engine Resources
+	- [http://www.codemag.com/article/1103041](http://www.codemag.com/article/1103041)
+
+- **Code nuggets**: Are simple expressions that are evaluated and rendered inline. Its always return markup for the view to render.
+```cshtml
+Not Logged In: @Html.ActionLink("Login", "Login")
+```
+
+- **Code Blocks**: Is a section of the view that contains strictly code rather than a combination of markup and code. Each line of code written un C# must include a semicolon (;) at the end. Code blocks do not render anything to the view. Instead, they allow you write arbitrary code that requieres no return value.
+```cshtml
+@{
+// The title and bids variables are
+// available to the entire view
+var title = Model.Title;
+var bids = Model.Bids;
+}
+<h1>@title<h1>
+<div class="items">
+<!-- Loop through the objects in the bids variable -->
+@foreach(var bid in bids) {
+<!-- The bid variable is only available within the foreach loop -->
+<div class="bid">
+<span class="bidder">@bid.Username</span>
+<span class="amount">@bid.Amount</span>
+</div>
+}
+<!-- This will throw an error: the bid variable does not exist at this scope! -->
+<div>Last Bid Amount: @bid.Amount</div>
+</div>
+```
+
+### Layouts ###
