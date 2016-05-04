@@ -1,4 +1,4 @@
-# Articulos sobre Tunning #
+# Artículos sobre Tunning #
 
 No ignorar sort warning
 [https://www.simple-talk.com/sql/performance/never-ignore-a-sort-warning-in-sql-server/](https://www.simple-talk.com/sql/performance/never-ignore-a-sort-warning-in-sql-server/ "No ingnorar sort warning")
