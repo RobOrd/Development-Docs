@@ -40,7 +40,7 @@ between elements, you use the Margin property
 
 ### Tips & Tricks ###
 
-- Get the XAML content from an external file
+- **Get the XAML content from an external file**
 ```csharp
 DependencyObject rootElement;
 using (FileStream fs = new FileStream(xamlFile, FileMode.Open))
@@ -49,7 +49,7 @@ using (FileStream fs = new FileStream(xamlFile, FileMode.Open))
 }
 ```
 
-- Find the control by name
+- **Find the control by name**
 ```csharp
 button1 = (Button)LogicalTreeHelper.FindLogicalNode(rootElement, "button1");
 // Wire up the event handler.
@@ -61,4 +61,13 @@ Another alternative is to use the FrameworkElement.FindName() method. In this ex
 ```csharp
 FrameworkElement frameworkElement = (FrameworkElement)rootElement;
 button1 = (Button)frameworkElement.FindName("button1");
+```
+
+- **Layout Rounding**
+
+Imagine that a two-column Grid has 200 pixels to work with. If you’ve split it evenly into two proportional columns, that means each gets 100 pixels. But if you have 175 pixels, the division isn’t as clean, and each column gets 87.5 pixels. That means the second column is slightly displaced from the ordinary pixel boundaries. Ordinarily, this isn’t a problem, but if that column contains one of the shape elements, a border, or an image, that content may appear blurry because WPF uses anti-aliasing to “blend” what would otherwise be sharp edges over pixel boundaries.
+
+If this problem affects your layout, there’s an easy fix. Just set the UseLayoutRounding property to true on your layout container. Now WPF will ensure that all the content in that layout container is snapped to the nearest pixel boundary, removing any blurriness.
+```xaml
+<Grid UseLayoutRounding="True">
 ```

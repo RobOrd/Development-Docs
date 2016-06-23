@@ -164,3 +164,30 @@ var bids = Model.Bids;
 ```
 
 ### Layouts ###
+Razor offers the ability to maintain a consistent look and feel throughout your entire website through layouts. With layouts, a single view acts as a template for all other views to use, defining the site-wide page layout and style. 
+
+A layout template typically includes the primary markup (scripts, CSS stylesheets, and structural HTML elements such as navigation and content containers), specifying locations within the markup in which views can define content. Each view in the site then refers to this layout, including only the content within the locations the layout has indicated.
+
+### Partial Views ###
+The most common scenario is needing to display the same high-level information in multiple locations in a site, but only on a few specific pages and in different places on each of those pages.
+
+```cshtml
+@model Auction
+<div class="auction">	
+	<a href="@Model.Url">
+		<img src="@Model.ImageUrl" />
+	</a>
+	<h4><a href="@Model.Url">@Model.Title</a></h4>
+	<p>Current Price: @Model.CurrentPrice</p>
+</div>
+```	
+
+To render this snippet as a partial view, simply save it as its own standalone view file (e.g. /Views/Shared/Auction.cshtml) and use one of ASP.NET MVC’s HTML Helpers **—Html.Partial()—** to render the view as part of another view. 
+```cshtml
+@model IEnumerable<Auction>
+<h2>Search Results</h2>
+@foreach(var auction in Model) 
+{
+	@Html.Partial("Auction", auction)
+}
+```	
