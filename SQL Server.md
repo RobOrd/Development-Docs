@@ -123,9 +123,7 @@ En conjunto regresa el resultado como un XML en un row en una columa
 ###OTHERS###
     DISTINTO DE-> 		<>   ó   !=
     SET DATEFORMAT
-    SPACE(4) -> Regresa 4 espacios, soporta variable
-    COUNT(column) -> No cuentan los valores NULL
-    COUNT(*) -> Cada registro cuenta
+    SPACE(4) -> Regresa 4 espacios, soporta variable    
     LIKE
     	'[a-r]%'	rango de valores
     	'[^a-r]%'	exclusion de rango de valores
@@ -133,6 +131,13 @@ En conjunto regresa el resultado como un XML en un row en una columa
 	
 ###DATE CONVERT###
 
+###Aggregated Functions###
+- `COUNT(*)` todos los registros son considerados en el conteo
+- `COUNT(ColumnA)` se omiten los valores NULL de ColumnA
+- `SELECT COUNT(1) FROM Table1` here **1** is a constant and has nothing with the ordinal positions of the table’s columns. 
+- `SELECT COUNT(ALL ColumnA) FROM Table1` es lo mismo que COUNT(ColumnA)
+- `SELECT COUNT(DISTINCT 1) FROM Table1` **1** is again only a constant. By having DISTINCT for the constant, the query will return a count of 1. The next is a similar query `SELECT COUNT(DISTINCT 2) FROM #TmpCounts; -- 1 count`
+- `SELECT COUNT(DISTINCT ColumnA) FROM Table1` will count distinct values in ColumnA
 
 ###PRACTICING##
 CURSOR, WITH, ROW_NUMBER, LEAD, LAG, FIRST_VALUE, LAST_VALUE, PARTITION BY,
