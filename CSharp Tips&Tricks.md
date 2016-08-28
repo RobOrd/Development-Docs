@@ -24,7 +24,7 @@ En caso de que la solución tenga dependencias de Nuget.
 	
 		NuGet.exe install "My Project/packages.config" -o packages/
 
-
+Fuente: [http://superuser.com/questions/604953/how-can-i-compile-a-net-project-without-having-visual-studio-installed](http://superuser.com/questions/604953/how-can-i-compile-a-net-project-without-having-visual-studio-installed)
 
 
 >Implementar esto como un feature de AgileTools
