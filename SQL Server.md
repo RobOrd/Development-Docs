@@ -142,3 +142,37 @@ En conjunto regresa el resultado como un XML en un row en una columa
 ###PRACTICING##
 CURSOR, WITH, ROW_NUMBER, LEAD, LAG, FIRST_VALUE, LAST_VALUE, PARTITION BY,
 CUBE, ROLLUP, UPSERT, INSERT SELECT, HIERARCHY WITH, STUFF, PATHINDEX, REPLACE, REPLICATE, CAST, CONVERT, PARSE, STRING MANIPULATION
+
+
+###SEQUENCIAL NUMBERS TABLE/VIEW##
+
+    CREATE VIEW [dbo].[vTally]
+    AS
+    WITH  L0 AS (SELECT 1 AS C UNION ALL SELECT 1)--2 rows
+    ,L1 AS (SELECT 1 AS C FROM L0 AS A, L0 AS B)--4 rows
+    ,L2 AS (SELECT 1 AS C FROM L1 AS A, L1 AS B)--16 rows
+    ,L3 AS (SELECT 1 AS C FROM L2 AS A, L2 AS B)--256 rows
+    ,L4 AS (SELECT 1 AS C FROM L3 AS A, L3 AS B)--65536 rows
+    ,L5 AS (SELECT 1 AS C FROM L4 AS A, L4 AS B)--WHOA!
+    ,Tally as (SELECT ROW_NUMBER() OVER(ORDER BY (SELECT NULL)) as N
+     from L5) 
+    
+    SELECT TOP(1000000) N FROM Tally
+    GO
+    
+    WITH Dates (N, CalendarDate) as 
+    (SELECT TOP(1000) N, DATEADD(DAY,N-1, CONVERT(DATE,'1/1/2016')) 
+      FROM vTally)
+    SELECT N, CalendarDate FROM Dates;
+
+>#### Salida
+###### N CalendarDate
+
+- 1	2016-01-01
+- 2	2016-01-02
+- 3	2016-01-03
+- 4	2016-01-04
+- 5	2016-01-05
+- 6	2016-01-06
+
+http://www.sqlservercentral.com/articles/calendar/145206/
