@@ -83,3 +83,28 @@ Si se requiere conocer el detalle de un archivo especifico se puede usar el coma
 Ya firmado en la consola de Ubuntu teclear:
 
     sudo reboot
+
+# GitHub #
+
+### Update a fork ###
+
+- Ingresar al repositorio al que se le hizo fork en tu cuenta de GitHub
+- Revisar que se tenga notificaciones de nuevos commit del autor del repo
+	- This branch is 3 commits behind ...
+	- Posicionado en la rama master
+- Click en el boton New pull request
+- En la sección de comparing changes
+	- Del lado izquierdo debe esta tu fork
+	- Del lado derecho debe estar el repositorio original
+	- Para esto se requiere hacer click en la opcion Switching the base
+- Click en Create pull request
+	- Ingresar un titulo por ejemplo Update from original.
+	- En la parte inferior hacer click en Create pull request
+	- git debera indicar que no hay conflictos para hacer el merge
+- Click en Merge pull request
+- Click en Confirm merge
+- GitHub regresa al repositorio fork
+	- El fork queda un commit adelante
+	- Ahora el fork y el repositorio original estan sincronizados.
+	
+![](http://i.imgur.com/7mEcu7J.png)
