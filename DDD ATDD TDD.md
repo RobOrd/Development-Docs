@@ -1,6 +1,72 @@
 
 
 # DDD (Domain Driven Design)
+Es un conjunto de prácticas, técnicas, herramientas y enfoques para dar respuesta a las necesidades complejas en el desarrollo de software, orientadas al core del negocio, su evolución y sus objetivos.
+
+**Aggregates**: Boundary around objects inside
+- can't access objects directly, must go through the Root. 
+- Contains no direct references to other Aggregates, only IDs.
+		
+    ```csharp
+	public class Product //Agregate root
+	{
+		public int Id { get; private set; }
+		public int CatalodId { get; private set; }
+		public Money Price { get; private set; }
+
+		public void ChangePrice(Money newPrice)
+		{
+		}
+	}
+	```
+
+**Factories**: For creation and initialization of complex objects structures. 
+- Creates entire Aggregates
+
+**Repositories**: 
+- Don't use generic Repository<T>!
+- Don't leak DAL concerns in the domain
+- Most DAL technology already offer a generic abstraction
+
+    ```csharp
+	public interface IProductRepository
+	{
+		Product LoadProductAggregateById(int id);
+		void AddNewProduct(Product product);
+      
+        //Queries
+		IEnumerable<Product> QueryProductsByCatalog(string catalogName);
+        IEnumerable<Product> QueryDiscountedProducts(string nameFilter Money maxPriceFilter);
+	}
+	```
+
+**Entity**: An entity will always have a unique identifier. An entity may have other attributes that define its characteristics. An entity encapsulates state that can change continuos over time, but is the same object with the same identity.
+
+**Value Object**: An object that represents some descriptive aspect of the domain, but has no conceptual identity is called Value Object. A value object is just a value, it quantifies or describes a property of another object, usually an entity. If the property changes the value object can be completely replaced by another with the new value.
+
+**Bounded Context**: One could theoretically conceive of a domain model for the entire enterprise, however such a large domain model is neither feasible nor cost effective. 
+	- We must divide large domains into smaller manageable models, each of which is bounded within a context.
+	
+![](http://i.imgur.com/5n5r6vf.png)
+
+**Patrones de Integracion entre Bounded Contexts**
+- Open Host Service(OHS): necesita un lenguaje de publicación común de interacción entre los modelos de dominio. Por ejemplo RPC o REST mediante API. Aunque puede implementarse mediante un middleware de mensajería como RabbitMQ.
+- Anticorruption Layer (ACL): Capa aislada que gestiona el mapeo o traducciones entre los modelos de dominio de los Bounded Contexts para mantener la compatibilidad entre ellos. 
+	- En dicha capa se implementan las interfaces expuestas como servicios de dominio. 
+	![](http://i.imgur.com/sQFvgpj.png)
+	
+
+**Event**: Bounded Context generates events to inform that something happened inside it.
+
+**Layered Architecture**: The basic idea is to structure an application into four conceptual layers.
+    - Infrastructure Layer: Capa que implementa/provee todos los servicios de bajo nivel, que depende de las abstracciones o interfaces definidas/ubicadas en los componentes de alto nivel.
+	- User Interface Layer: Capa de presentación gráfica al usuario. No contiene lógica de negocio siendo el cliente directo de la capa de aplicación.
+	- Application Layer: Lógica de aplicación (no de negocio) mediante servicios (Application Services). Cliente directo de la capa de dominio.
+	- Domain Layer: Contiene la lógica de negocio mediante servicios (Domain Services) y modelado de dominio (Domain Model). Alojando las abstracciones o interfaces necesarias de acceso a datos (respositorios) y publicación de eventos de dominio (Domain Events).
+	
+**Onion Architecture**
+La principal ventaja o diferencia con la arquitectura por capas habitual se encuentra en desacoplar/extraer la base de datos tratándola como un recurso externo. Siendo encargada la capa de infrastructura en implementar las interfaces de acceso a datos ubicadas en el dominio mediante Repository Pattern. 
+![](http://i.imgur.com/lDCLhEK.png)
 
 - **IEventDispatcher**: The IEventDispatcher is actually going to be the IoC container such as Ninject or CastleWindsor etc. It is responsible for finding the right handlers to deal with the EndOfSurvey event. There can potentially be more than one and it will find them all.
 
@@ -18,3 +84,5 @@
     	}
 	}
 	```
+
+https://lostechies.com/jimmybogard/2009/09/03/ddd-repository-implementation-patterns/
