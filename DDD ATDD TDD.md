@@ -59,10 +59,10 @@ Es un conjunto de prácticas, técnicas, herramientas y enfoques para dar respue
 **Event**: Bounded Context generates events to inform that something happened inside it.
 
 **Layered Architecture**: The basic idea is to structure an application into four conceptual layers.
-    - Infrastructure Layer: Capa que implementa/provee todos los servicios de bajo nivel, que depende de las abstracciones o interfaces definidas/ubicadas en los componentes de alto nivel.
-	- User Interface Layer: Capa de presentación gráfica al usuario. No contiene lógica de negocio siendo el cliente directo de la capa de aplicación.
-	- Application Layer: Lógica de aplicación (no de negocio) mediante servicios (Application Services). Cliente directo de la capa de dominio.
-	- Domain Layer: Contiene la lógica de negocio mediante servicios (Domain Services) y modelado de dominio (Domain Model). Alojando las abstracciones o interfaces necesarias de acceso a datos (respositorios) y publicación de eventos de dominio (Domain Events).
+    - Infrastructure Layer: Capa que implementa/provee todos los servicios de bajo nivel (persistence, sending message, logging), que depende de las abstracciones o interfaces definidas/ubicadas en los componentes de alto nivel.
+    - User Interface Layer: Capa de presentación gráfica al usuario. No contiene lógica de negocio siendo el cliente directo de la capa de aplicación.
+    - Application Layer: Lógica de aplicación (no de negocio) mediante servicios (Application Services). Cliente directo de la capa de dominio. Coordina las acciones entre los objetos del modelo del dominio.
+    - Domain Layer: Contiene la **lógica de negocio** mediante servicios (Domain Services) y **modelado de dominio** (Domain Model). Alojando las abstracciones o interfaces necesarias de acceso a datos (respositorios) y publicación de eventos de dominio (Domain Events).
 	
 **Onion Architecture**
 La principal ventaja o diferencia con la arquitectura por capas habitual se encuentra en desacoplar/extraer la base de datos tratándola como un recurso externo. Siendo encargada la capa de infrastructura en implementar las interfaces de acceso a datos ubicadas en el dominio mediante Repository Pattern. 
