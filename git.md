@@ -71,6 +71,9 @@ Si se requiere conocer el detalle de un archivo especifico se puede usar el coma
 
 ![](http://i.imgur.com/RfHXwdv.png)
 
+Si se requiere conocer todos los archivos modificados en un commit se puede usar el comando siguiente, el cual listará solamente el nombre de los archivos:
+
+    git diff-tree --no-commit-id --name-only -r 73a24af601be33dd1d8c138ce7708b3c840efb07
 
 ##### Buscar en los mensajes de un commit un texto específico #####
 
