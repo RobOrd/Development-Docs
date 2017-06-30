@@ -1,6 +1,10 @@
 
 
 # DDD (Domain Driven Design)
+Domain Driven Design (DDD) is a wonderful technique that attempts to bring our designs closer to the domains we are working on. 
+
+The theory being that the closer we are to the domain in our implementations, the better our software will be. With this goal in mind, DDD has been extremely successful throughout our industry.
+
 Es un conjunto de prácticas, técnicas, herramientas y enfoques para dar respuesta a las necesidades complejas en el desarrollo de software, orientadas al core del negocio, su evolución y sus objetivos.
 
 **Aggregates**: Boundary around objects inside
