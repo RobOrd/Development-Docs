@@ -62,6 +62,12 @@ Es un conjunto de prácticas, técnicas, herramientas y enfoques para dar respue
 
 **Event**: Bounded Context generates events to inform that something happened inside it.
 
+***Domain Event Handlers***
+What does handler have access to? All of the infrastructure layer interfaces. This makes it a great place to send out emails and notifications, synchronize with third party services, create audit records, etc.
+- Domain event handlers should not change the state of the object that caused domain event to be triggered.
+- Domain events should be raised inside the domain.
+- Domain events handlers should be looked at as a side effect / chain reaction facilitator.
+
 **Layered Architecture**: The basic idea is to structure an application into four conceptual layers.
     - Infrastructure Layer: Capa que implementa/provee todos los servicios de bajo nivel (persistence, sending message, logging), que depende de las abstracciones o interfaces definidas/ubicadas en los componentes de alto nivel.
     - User Interface Layer: Capa de presentación gráfica al usuario. No contiene lógica de negocio siendo el cliente directo de la capa de aplicación.
