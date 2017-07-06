@@ -48,6 +48,15 @@ Es un conjunto de prácticas, técnicas, herramientas y enfoques para dar respue
 
 **Value Object**: An object that represents some descriptive aspect of the domain, but has no conceptual identity is called Value Object. A value object is just a value, it quantifies or describes a property of another object, usually an entity. If the property changes the value object can be completely replaced by another with the new value.
 
+***Combinable***
+Values are often represented numerically, so in a lot of cases, they can be combined to create a new
+value. Combinability like this is a defining characteristic of value objects in general. So when you are with
+domain experts and they talk about combining two instances of a certain concept, this is a clear
+sign that you may need to model the concept as a value object.
+
+Remember, though, that value objects are immutable, and the result will be a new value object with a desired value. The original objects remain unchanged. Through representing a value or quantity, in most cases value objects can be combined using
+operations like addition, subtraction, and multiplication.
+
 **Bounded Context**: One could theoretically conceive of a domain model for the entire enterprise, however such a large domain model is neither feasible nor cost effective. 
 	- We must divide large domains into smaller manageable models, each of which is bounded within a context.
 	
