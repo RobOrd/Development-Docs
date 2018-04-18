@@ -1,5 +1,7 @@
 # Git #
 
+El objetivo principal de trabajar con un sistema de control de código fuente como Git es mantener un histórico fiel e inalterado de todas las etapas por las que ha ido pasando el código fuente de un proyecto. **Por regla general** no deberíamos modificar la historia salvo que sea estrictamente necesario
+
 ### Recomendaciones de Uso ###
 - No es necesario hacer push constantemente pero sin con regularidad, sobre todo cuando se requiere compartir los cambios locales a otro miembro del equipo de desarrollo.
 
@@ -79,6 +81,17 @@ Si se requiere conocer todos los archivos modificados en un commit se puede usar
 
     git log -g --grep=STRING
 
+## Eliminar el último commit de Git ##
+Los siguientes ejemplos se refieren exclusivamente a cuando se trata del último commit realizado.
+
+### El commit no está en Github todavía ###
+Si ya está hecho el commit pero aun no se ha enviado al repositorio origen (en Github, GitLab, Bitbucket o donde sea), podemos solucionarlo de varias maneras.
+
+#### Volver al último commit empezando de cero ####
+Con este comando es eliminar el último commit de la historia, dejando la carpeta en el punto anterior en que estaba antes de hacer los cambios correspondientes a dicho commit. El ^ del final de la cabecera le indica a Git que el punto de la historia en donde deseas dejarla (resetearla), es el padre del último commit en la rama actual (que se llama siempre HEAD).
+	git reset HEAD^ --hard 
+
+#### Volver al último commit sin perder los cambios del commit ####
 
 # Mantenimiento del servicio GitLab #
 
