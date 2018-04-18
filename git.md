@@ -84,14 +84,37 @@ Si se requiere conocer todos los archivos modificados en un commit se puede usar
 ## Eliminar el último commit de Git ##
 Los siguientes ejemplos se refieren exclusivamente a cuando se trata del último commit realizado.
 
-### El commit no está en Github todavía ###
+### El commit no está en el servidor remoto todavía ###
 Si ya está hecho el commit pero aun no se ha enviado al repositorio origen (en Github, GitLab, Bitbucket o donde sea), podemos solucionarlo de varias maneras.
 
 #### Volver al último commit empezando de cero ####
-Con este comando es eliminar el último commit de la historia, dejando la carpeta en el punto anterior en que estaba antes de hacer los cambios correspondientes a dicho commit. El ^ del final de la cabecera le indica a Git que el punto de la historia en donde deseas dejarla (resetearla), es el padre del último commit en la rama actual (que se llama siempre HEAD).
+Con este comando es eliminar el último commit de la historia, dejando la carpeta en el punto anterior en que estaba antes de hacer los cambios correspondientes a dicho commit, esto hará que pierdas los cambios que habia en éste. El ^ del final de la cabecera le indica a Git que el punto de la historia en donde deseas dejarla (resetearla), es el padre del último commit en la rama actual (que se llama siempre HEAD).
+
 	git reset HEAD^ --hard 
 
 #### Volver al último commit sin perder los cambios del commit ####
+Con este comando se eliminará el último commit pero no se perderan los cambios realizados.
+
+	git reset HEAD^ --soft
+	
+#### Agregar archivos al último commit ####
+Para añadir archivos al último commit no hace falta que deshagas todo. Solo se deben agregar los archivos con el comando **add** y posteriormente hacer el commit de la siguiente manera. Recordemos que esto aplica solo si el último commit aun está en tu equipo.
+
+	git commit --amend
+	
+### El commit ya esta en el servidor remoto ###
+Se trata de hacer lo mismo que acabamos de ver, pero esta vez teniendo en cuenta que no solo está en nuestro equipo local, sino que dicho commit también se ha enviado al servidor de origen.
+
+#### Los repositorios local y remoto están sincronizados ####
+Estamos trabajando en un repositorio, hacemos cambios, realizamos un commit y lo enviamos al remoto usando *push*. Luego nos damos cuenta de que va con un error y queremos echarnos para atrás.
+
+Lo primero que debemos realizar es destruir el commit local como lo vimos anteriormente. Luego forzamos los cambios al repositorio remoto de origen, es decir forzamos subir el commit previo al commit incorrecto que acabamos de destruir.
+	
+	git reset HEAD^ --hard
+	git push origin -f
+
+Un *push* al origen falla si el commit que esta arriba no es un ancestro del commit que se está intentando hacer, es decir si el repositorio remoto va por delante del repositorio local. **Es tiene efectos destructivos** y se pierden los commits que van por delante de nosotros, lo cual para este caso es justo lo que queremos hacer.
+
 
 # Mantenimiento del servicio GitLab #
 
