@@ -1,8 +1,8 @@
 
 # WPF #
 
-### XAML ###
-#### Special Characters ####
+### XAML
+#### Special Characters
 Finalizados con punto y coma;
 > 
 - Less than (<) &lt
@@ -28,7 +28,7 @@ arranged by their container based on their size, order, and (optionally) other
 information that’s specific to the layout container. If you need to add whitespace
 between elements, you use the Margin property
 
-#### Using Types from Other Namespaces ####
+#### Using Types from Other Namespaces
 **Naming Conventions, samples**
 
 ```xaml
@@ -38,7 +38,7 @@ between elements, you use the Margin property
  xmlns:local="clr-namespace:MyNamespace"
  ```
 
-### Tips & Tricks ###
+### Tips & Tricks
 
 - **Get the XAML content from an external file**
 ```csharp
@@ -71,3 +71,6 @@ If this problem affects your layout, there’s an easy fix. Just set the UseLayo
 ```xaml
 <Grid UseLayoutRounding="True">
 ```
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTI3MjIwODIyM119
+-->
