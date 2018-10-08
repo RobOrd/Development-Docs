@@ -18,7 +18,7 @@ and hard returns is reduced to a single space. If you may want to include a seri
 [There is a lot of space inside these quotation marks "  ".]</TextBox>
 ```
 
-#### Layout ###
+#### Layout
 In WPF, layout is determined by the container that you use. Although there are several containers to choose from, the **ideal** WPF window follows a few key principles:
 - Elements (such as controls) should not be explicitly sized. Instead, they grow to fit
 their content. For example, a button expands as you add more text. You can limit
@@ -72,5 +72,5 @@ If this problem affects your layout, there’s an easy fix. Just set the UseLayo
 <Grid UseLayoutRounding="True">
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI3MjIwODIyM119
+eyJoaXN0b3J5IjpbLTUyOTcxODY4NCwtMjcyMjA4MjIzXX0=
 -->
