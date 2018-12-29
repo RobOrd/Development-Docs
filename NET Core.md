@@ -1,5 +1,8 @@
 # NET Core
 
+### Introduction
+.NET Core is an open-source, general-purpose development platform maintained by Microsoft and the .NET community on GitHub. It's cross-platform (supporting Windows, macOS, and Linux) and can be used to build device, cloud, and IoT applications. It was designed so everything could be done from the command line, without the need for an IDE.
+
 ### Installing .NET Core On Windows
 Download and install the official MSI installer for x64 or x86
 
