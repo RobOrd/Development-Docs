@@ -1,12 +1,17 @@
 # Software Design Patterns and Practices
 
-### Some of theory
+The purpose of most programming techniques is to deliver working software as efficiently as possible. One aspect of that is to write maintainable code. An excellent way to make code more maintainable is through loose coupling. As far back as 1994, when the Gang of Four wrote Design Patterns, this was already common knowledge: Program to an interface, not an implementation.
+
+>Loose coupling makes code extensible, and extensibility makes it maintainable.
+
 Software components are subject to change depending on the business. Since software is for business and the reverse is not always true. If so, then we have to keep in mind that, when change comes, our application can adapt smoothly or at least by giving only a little trouble.
 
 - **Software design principle**: Principle provides us guideline. Principle says what is right and what is wrong. It doesn’t say us how to solve problem. It just gives some guideline so that we can design good software and avoid bad design. Some principles are DRY, OCP, DIP, etc.
 - **Software design pattern**: Pattern is a general reusable solution to a commonly occurring problem within a given context in software design. Some patterns are factory pattern, Decorator pattern etc.
 
-### Service Locator Pattern
+## Inversion of Control
+
+#### Service Locator Pattern
 The service locator pattern is a design pattern used in software development to encapsulate the processes involved in obtaining a service with a strong abstraction layer. This pattern uses a central registry known as the “service locator” which on request returns the information necessary to perform a certain task.
 The ServiceLocator is responsible for returning instances of services when they are requested for by the service consumers or the service clients. 
 
@@ -117,7 +122,9 @@ What if we try to use the service before a provider has been registered, it retu
 
 This is also useful for intentionally failing to find services. If we want to disable a system temporarily, we now have an easy way to do so, simply don’t register a provider for the service, and the locator will default to a null provider.
 
-### Dependency Injection Pattern
+#### Dependency Injection Pattern
+> Dependency Injection is a set of software design principles and patterns that enables you to develop loosely coupled code.
+
 Dependency injection is a programming technique that makes a class independent of its dependencies. It achieves that by decoupling the usage of an object from its creation. This helps you to follow SOLID’s dependency inversion and single responsibility principles. Their goal is to improve the reusability of your code. 
 
 They also aim to reduce the frequency with which you need to change a class. Dependency injection supports these goals by decoupling the creation of the usage of an object. That enables you to replace dependencies without changing the class that uses them. It also reduces the risk that you have to change a class just because one of its dependencies changed.
@@ -131,8 +138,13 @@ If you want to use this technique, you need classes that fulfill four basic role
 
 The injector is the only role that isn’t required by the dependency inversion principle. But that’s not an issue because you don’t need to implement it.
 
+##### Myths about DI
+- **DI is only relevant for late binding**: The fact that DI enables late binding doesn’t mean that it’s only relevant in late-binding scenarios.
+- **DI is only relevant for unit testing**: Even if you don’t write unit tests, DI is still relevant because of all the other benefits it offers.
+- **DI is a sort of Abstract Factory on steroids**: Many developers and architects think about DI as a service that can be used to locate other services. This is called a Service Locator, but it’s the exact opposite of DI.
+- **DI requires a DI Container**: Pure DI is the practice of applying DI without a DI Container. DI is a set of principles and patterns, and a DI Container is a useful, but optional tool.
 
-### Service Locator vs Dependency Injection
+#### Service Locator vs Dependency Injection
 The fundamental choice is between Service Locator and Dependency Injection. The first point is that both implementations provide the fundamental decoupling between components - in both cases application code is independent of the concrete implementation of the service interface. The important difference between the two patterns is about how that implementation is provided to the application class. With service locator the application class asks for it explicitly by a message to the locator. With injection there is no explicit request, the service appears in the application class - hence the inversion of control.
 
 Inversion of control is a common feature of frameworks, but it's something that comes at a price. It tends to be hard to understand and leads to problems when you are trying to debug. So on the whole I prefer to avoid it unless I need it. This isn't to say it's a bad thing, just that I think it needs to justify itself over the more straightforward alternative.
@@ -148,6 +160,10 @@ graph TB
 IoC --> SL[Service Locator]
 IoC --> DI[Dependency Injection]
 ```
+
+#### Important 
+If you thought of DI as a Service Locator (that is, a general-purpose factory), then this is something you need to unlearn. DI is the opposite of a Service Locator; it’s a way to structure code so that you never have to imperatively ask for Dependencies. Rather, you require consumers to supply them.
+
 
 **Martin Fowler** 
 > The current rush of lightweight containers all have a common underlying pattern to how they do service assembly - the dependency injector pattern. Dependency Injection is a useful alternative to Service Locator. When building application classes the two are roughly equivalent, but I think Service Locator has a slight edge due to its more straightforward behavior. However if you are building classes to be used in multiple applications then Dependency Injection is a better choice.

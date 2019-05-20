@@ -86,3 +86,13 @@ public class EndpointConfig : IConfigureThisEndpoint
 }
 ```
 I order to acomplish with new technologies **is not recommendable to setup the endpoint using NServiceBus.Host**
+
+
+### RabbitMQ
+
+Se requiere de una cadena de conexión para que NServiceBus use RabbitMQ como Transport
+```xml
+<connectionStrings>
+   <add name="NServiceBus/Transport" connectionString="host=localhost;username=guest;password=guest"/>
+</connectionStrings>
+```

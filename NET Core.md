@@ -63,3 +63,9 @@ Download and install the official MSI installer for x64 or x86
 - Dentro del XXX-nsg crear un inbound rule
 	- Se debe llamar RDP y debe ser de tipo RDP con el puerto TCP 3389
 - Esta configuración permitira el acceso a traves de escritorio remoto
+
+
+#### Sharing through the .Net Standard
+Microsoft introduced the .Net Standard to provide a common standard for APIs across the Microsoft ecosystem. It can be seen as a successor to portable class libraries (PCLs) that simplifies the business of targeting different platforms. Where PCLs are based on profiles defined by intersecting platform capabilities, the .Net Standard provides a curated set of APIs.
+
+The upshot is that you can create libraries that can be directly referenced by .Net Framework, .Net Core and Xamarin applications. You just need to ensure that the .Net Standard Library NuGet package is added to any application that wants to reference a .Net Standard library.
