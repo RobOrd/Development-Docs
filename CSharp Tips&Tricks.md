@@ -28,3 +28,30 @@ Fuente: [http://superuser.com/questions/604953/how-can-i-compile-a-net-project-w
 
 
 >Implementar esto como un feature de AgileTools
+
+
+Algo parecido se puede ahora aplicar en el switch
+```csharp
+if (result is TileDataList item)
+    return item.FilterText.Contains(NormalizeFilter(this.searchKey));
+    
+// Switch Statement in C# 7        
+switch (a)        
+{        
+   case Performer performer when (performer.Age == 40):        
+       Console.WriteLine($"The performer {performer.Name}");        
+       break;        
+   case Actor actor when (actor.Age == 35):        
+       Console.WriteLine($"The Actor name is {actor.Name}");        
+       break;        
+   case Actor actor:        
+       Console.WriteLine($"The Actor is unknown");        
+       break;        
+   default:        
+       Console.WriteLine("Not found");        
+       break;        
+   case null:        
+       throw new ArgumentNullException(nameof(a));        
+}        
+```
+
