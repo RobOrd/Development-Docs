@@ -179,3 +179,34 @@ http://www.sqlservercentral.com/articles/calendar/145206/
 
 How to Write a Better T-SQL Code (revisar este articulo)
 - http://www.sqlservercentral.com/blogs/si-vis-pacem-para-sql/2018/11/16/how-to-write-a-better-t-sql-code/?utm_source=SSC&utm_medium=pubemail
+
+https://www.upwork.com/hiring/data/common-sql-programming-mistakes/
+https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/database-level-roles?view=sql-server-2017
+
+
+
+### Why not declare a user defined function for each constant required? 
+This has the added benefit that you can then view dependencies for this specific function/constant to see what other source code refers to it. Very useful if a business rule change will affect code using that constant.
+
+The only real problem with this approach is that you have a lot of disk access as SQL Server might have to repetitively get the same value over and over again
+
+There is a potentially big penalty to be paid with using functions in the maner you suggest.
+
+The problem lies in the fact that functions are in-line by nature. This means that SQL Server will evaluate the function for each row in the table thus resulting in a full table scan.
+
+Inorder to prevent this you will need to declare a variable that you can assign the value to, e.g
+
+DECLARE @var
+
+SET @var = dbo.udf()
+
+SELECT * FROM sometable WHERE somefield = @var
+
+Using
+
+SELECT * FROM sometable WHERE somefield = dbo.udf()
+
+will give you FTS
+ 
+
+
