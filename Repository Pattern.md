@@ -4,6 +4,11 @@ In Domain Driven Design there is a concept called aggregate root. The aggregate 
 
 So any operation on a BookReview should be done through a Book. Since the existence of BookReview is entirely dependent on a Book. But when we use an ORM, this problem simply doesn’t exist. We can navigate and change an entity which is a root and all the entities that are connected to that entity. We do that simply by using navigation properties in most ORMs.
 
+
+**Repository Pattern**: To create an abstract data access layer for the application which allows to centralise all data access logic in one place. With generic feature, we can reduce the amount of code we need for common scenarios.
+
+**Unit of Work pattern**: To combine a set of interactions and commit them at once using a transaction.
+
 - https://lostechies.com/jimmybogard/2012/10/08/favor-query-objects-over-repositories/
 - https://lostechies.com/jimmybogard/2009/09/03/ddd-repository-implementation-patterns/
 - https://deviq.com/repository-pattern/
@@ -11,3 +16,4 @@ So any operation on a BookReview should be done through a Book. Since the existe
 - https://github.com/HamidMosalla/FreelancerBlog
 - https://www.stevejgordon.co.uk/cqrs-using-mediatr-asp-net-core
 - https://blogs.msdn.microsoft.com/cdndevs/2016/01/26/simplifying-development-and-separating-concerns-with-mediatr/
+- https://techbrij.com/generic-repository-unit-of-work-entity-framework-unit-testing-asp-net-mvc
