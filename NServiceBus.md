@@ -64,11 +64,41 @@ The Saga pattern is difficult to debug, especially when many microservices are i
 ### Routing Slips
 Essentially they’re a stateless alternative to Sagas and very useful for tackling workflow-processing needs
 
+## Messages
+bla
+
+### Commands
+
+### Events
+
+::: info
+A **command** is a message that can be sent from one or more senders and is processed by a single receiver.
+
+An **event** is a message that is published from a single sender, and is processed by (potentially) many receivers.
+:::
+
+Atributtes    | Commands | Events
+--------------|----------|-----------
+Interface           | `ICommand`            | `IEvent`
+Logical Senders	    | One or more           | 1
+Logical Receivers   | 1                     | Zero or more
+Purpose	            | *Please do something*	| *Something has happened*
+Naming (Tense)      | Imperative            | Past
+Examples            | `PlaceOrder` `ChargeCreditCard` |	`OrderPlaced` `CreditCardCharged`
+Coupling Style      | Tight                 | Loose
+
+Commands and events will sometimes come in pairs. A **command** will arrive, perhaps from a website UI, telling the system to `DoSomething`. The system does that work, and as a result, publishes a `SomethingHappened` **event**, which other components in the system can react to.
 
 ## Endpoint
 An endpoint is a logical entity that communicates with other endpoints via messaging. Each endpoint has an identifying name and contains a collection of message handlers and sagas. An endpoint can be deployed to a number of machines and environments. Each deployment of an endpoint is an instance. Each endpoint instance has an input queue which contains messages for the endpoint instance to process.
 
 It is common for each endpoint to have a single endpoint instance. As endpoints need to scale-out, additional endpoint instances can be added. This collection of endpoint instances still represents a single logical endpoint.
+
+::: info  
+An **endpoint** is a logical concept, defined by an endpoint name and associated code, that defines an owner responsible for processing messages. 
+
+An **endpoint instance** is a physical instance of the endpoint deployed to a single server. Many endpoint instances may be deployed to many servers in order to scale out the processing of a high-volume message to multiple servers.
+:::
 
 ### Hosting
 This sample shows how to host an NServiceBus endpoint using the NServiceBus.Host.
