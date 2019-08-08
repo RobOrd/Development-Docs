@@ -31,3 +31,34 @@ The concept of using constructor injection for required dependencies and propert
 
 ##### Use Relationship Types, Not Service Locators
 Giving components access to the container, storing it in a public static property, or making functions like Resolve() available on a global “IoC” class defeats the purpose of using dependency injection. Such designs have more in common with the Service Locator pattern.
+
+### Instance Scope
+Instance scope determines how an instance is shared between requests for the same service
+
+##### Instance Per Dependency
+Also called **transient** or **factory** in other containers. Using per-dependency scope, a unique instance will be returned from each request for a service.
+
+This is the **default** if no other option is specified.
+```csharp
+var builder = new ContainerBuilder();
+
+// This...
+builder.RegisterType<Worker>();
+
+// ...is the same as this:
+builder.RegisterType<Worker>().InstancePerDependency();
+```
+
+When you resolve a component that is instance per dependency, you get a new one each time.
+```csharp
+using(var scope = container.BeginLifetimeScope())
+{
+  for(var i = 0; i < 100; i++)
+  {
+    // Every one of the 100 Worker instances
+    // resolved in this loop will be brand new.
+    var w = scope.Resolve<Worker>();
+    w.DoWork();
+  }
+}
+```
