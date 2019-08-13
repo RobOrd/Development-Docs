@@ -57,6 +57,37 @@ rabbitmq-server $@
 ```
 This script also initialize and expose the RabbitMQ webadmin at port 15672.
 
+#### Docker Compose
+El siguiente es un archivo yaml que contiene la configuración con la cual se pone a punto un servicio de RabbitMQ y una instancia de SQL Server.
+
+```yaml
+version: '3'
+services:
+  rabbit1:
+    image: "rabbitmq:3-management"
+    hostname: "rabbit1"
+    environment:
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    labels:
+      NAME: "rabbitmq1"
+  sql1:
+    image: "mcr.microsoft.com/mssql/server"
+    hostname: "sql1"
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Express"
+      SA_PASSWORD: "NServiceBus!"
+    ports:
+      - "11433:1433"
+```
+Para levantar estos servicio con este script solo se requiere ejecutar el siguiente comando de Docker Compose.
+
+> docker-compose up --detach
 
 ### Docker on Azure
 > - crear VM o usar una existente
